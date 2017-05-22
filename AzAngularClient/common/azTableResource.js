@@ -9,9 +9,24 @@
                     azTableResource])
 
     function azTableResource($resource, appSettings) {
-        return {
-            azTableList: $resource(appSettings.serverPath + "api/az/tables")
-            //Attendance: $resource(appSettings.serverPath + "api/attendance/student/:sid")
-        };
-    }
+        return $resource(appSettings.serverPath + "api/az/getTable/:name", null,
+        {
+                azTableList: {
+                url: appSettings.serverPath + "api/az/ListTables",
+                method: 'GET', isArray: true
+                },
+                azEntityListStudents : {
+                    url: appSettings.serverPath + "api/az/ListNamesFromTable/TableName/:name",
+                    method: 'GET', isArray: true
+                },
+                azListStudentEntries: {
+                    url: appSettings.serverPath + "api/az/ListEntriesFromTableForEntity/TableName/:name/Entity/:id",
+                    method: 'GET', isArray: true
+                },
+
+            
+
+         query: { method: 'GET', params: { name: '' }, isArray: true },
+                    })
+    };
 }());
