@@ -16,12 +16,10 @@ namespace AzureTableQuery.Models
 
         public AzStorageManager()
         {
-            var appset = ConfigurationManager.AppSettings["StorageConnectionString"];
+           var appset = ConfigurationManager.AppSettings["StorageConnectionString"];
            storageAccount = CloudStorageAccount.Parse(
            ConfigurationManager.AppSettings["StorageConnectionString"]);
            tableClient = storageAccount.CreateCloudTableClient();
-            
-            
 
         }
 
@@ -68,6 +66,14 @@ namespace AzureTableQuery.Models
 
             return null;
         }
+
+        public List<CloudTable> getTablesList()
+        {
+            CloudTableClient tableClient = new CloudTableClient(storageAccount.TableEndpoint, storageAccount.Credentials);
+            var result = tableClient.ListTables().ToList();
+            return result;
+        }
+
 
     }
 }
