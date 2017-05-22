@@ -22,7 +22,9 @@ namespace AzureTableQuery.Controllers
         public dynamic GetAzureEntries()
         {
             AzStorageManager azm = new AzStorageManager();
-            return azm.getCloudEntities("DSAA2017Summer");
+            return azm.getCloudEntities("DSAA2017Summer").
+                Select(s => new { s.ip, s.Name, Date = s.Timestamp.ToString("MMMM dd, yyyy") });
+                    
         }
 
         // GET api/values/5

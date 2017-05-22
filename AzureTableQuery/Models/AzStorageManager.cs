@@ -17,9 +17,9 @@ namespace AzureTableQuery.Models
         public AzStorageManager()
         {
             var appset = ConfigurationManager.AppSettings["StorageConnectionString"];
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+           storageAccount = CloudStorageAccount.Parse(
            ConfigurationManager.AppSettings["StorageConnectionString"]);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+           tableClient = storageAccount.CreateCloudTableClient();
             
             
 
@@ -52,18 +52,18 @@ namespace AzureTableQuery.Models
         }
 
 
-        public List<TableEntity> getCloudEntities(string tableName)
+        public List<ExamAzureTE> getCloudEntities(string tableName)
         {
             // Create the table client.
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
             CloudTable table = getCloudTable(tableName);
 
-            TableQuery<TableEntity> query = new TableQuery<TableEntity>();
+            TableQuery<ExamAzureTE> query = new TableQuery<ExamAzureTE>();
             var entities = table.ExecuteQuery(query);
             if(entities.Count() > 0)
             {
-                return entities.ToList(); ;
+                return entities.ToList();
             }
 
             return null;
