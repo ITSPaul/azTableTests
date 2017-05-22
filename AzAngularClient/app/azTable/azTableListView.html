@@ -1,0 +1,57 @@
+<div class="panel panel-primary"
+     ng-controller="AzTableCtrl as vm">
+    <div class="panel-heading"
+         style="font-size:large">
+        Student Details
+    </div>
+
+    <div class="panel-body">
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <td>Table Name</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="t in vm.azTables">
+                    <td>{{ t.Name}}</td>
+<!--                    <td>{{ student.sname }} {{ }} {{student.sname}} </td>-->
+                    <td>
+                        <button ng-click="vm.show(student.studentID)">
+                            Attendances
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"
+             style="font-size:large">
+            Transactions
+        </div>
+
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Module Name</td>
+                        <td>Date</td>
+                        <td>Present</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="studentAttendance in vm.studentAttendances">
+                        <td>{{ studentAttendance.moduleAttended.moduleName }}</td>
+                        <td>{{ studentAttendance.attendanceDate | date:'yyyy-MM-dd HH:mm' }}</td>
+                        <td>{{ studentAttendance.present}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
